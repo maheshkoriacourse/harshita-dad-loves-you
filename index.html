@@ -13,17 +13,15 @@
     --gold:#c9a227; --gold-bright:#e8c766; --gold-soft:#d4b876;
     --ink:#f5efe2; --ink-dim:#d8cdb8; --royal-1:#0d0d1f; --royal-2:#1a1330; --royal-3:#241a3e;
   }
+  html { scroll-behavior:smooth; }
   body {
-    background:
-      radial-gradient(1200px 600px at 50% -10%, rgba(201,162,39,.16), transparent 60%),
-      radial-gradient(900px 500px at 85% 110%, rgba(201,162,39,.10), transparent 55%),
-      linear-gradient(170deg, var(--royal-1) 0%, var(--royal-2) 45%, var(--royal-3) 78%, #120c22 100%);
+    background:linear-gradient(170deg, var(--royal-1) 0%, var(--royal-2) 45%, var(--royal-3) 78%, #120c22 100%);
     color:var(--ink);
     font-family:'EB Garamond',serif; font-size:18px; line-height:1.85;
     overflow-x:hidden;
   }
   .frame {
-    position:fixed; inset:14px; border:1px solid rgba(201,162,39,.5); pointer-events:none; z-index:5;
+    position:fixed; inset:14px; border:1px solid rgba(201,162,39,.5); pointer-events:none; z-index:60;
     box-shadow:inset 0 0 60px rgba(0,0,0,.45);
   }
   .frame::before, .frame::after {
@@ -31,40 +29,57 @@
   }
   .frame::before { top:-2px; left:-2px; border-right:none; border-bottom:none; }
   .frame::after { bottom:-2px; right:-2px; border-left:none; border-top:none; }
-  .wrap { max-width:860px; margin:0 auto; padding:72px 34px 110px; position:relative; z-index:2; }
 
-  .crown-line { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:22px; }
+  /* ============ HERO — river.jpg full-bleed background ============ */
+  .hero {
+    position:relative; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:90px 24px 90px;
+    background:
+      linear-gradient(180deg, rgba(13,13,31,.62) 0%, rgba(26,19,48,.72) 55%, rgba(13,13,31,.97) 100%),
+      url('river.jpg') center 30% / cover no-repeat;
+    background-attachment:fixed;
+  }
+  .crown-line { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:20px; }
   .crown-line::before, .crown-line::after { content:''; height:1px; width:min(160px,22vw);
     background:linear-gradient(90deg, transparent, var(--gold)); }
   .crown-line::after { background:linear-gradient(270deg, transparent, var(--gold)); }
-  .crown { font-size:40px; filter:drop-shadow(0 0 14px rgba(232,199,102,.55)); }
-
-  .eyebrow { text-align:center; letter-spacing:6px; font-size:12.5px; text-transform:uppercase;
+  .crown { font-size:46px; filter:drop-shadow(0 0 16px rgba(232,199,102,.6)); }
+  .eyebrow { letter-spacing:6px; font-size:12.5px; text-transform:uppercase;
     color:var(--gold-soft); font-family:'Cormorant Garamond',serif; }
   h1.name-script {
-    font-family:'Great Vibes',cursive; text-align:center;
-    font-size:clamp(58px,11vw,104px); font-weight:400; line-height:1.15;
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(64px,13vw,120px); font-weight:400; line-height:1.12;
     background:linear-gradient(100deg,#f3d98b 10%, #fff6d8 45%, #caa93f 80%);
     -webkit-background-clip:text; background-clip:text; color:transparent;
-    text-shadow:0 0 60px rgba(201,162,39,.18); margin:6px 0 4px;
+    text-shadow:0 0 70px rgba(201,162,39,.25); margin:8px 0 4px;
   }
-  .royal-title { text-align:center; font-family:'Cormorant Garamond',serif;
-    font-size:clamp(20px,4vw,30px); letter-spacing:2.5px; color:var(--ink); }
+  .royal-title { font-family:'Cormorant Garamond',serif;
+    font-size:clamp(19px,4vw,29px); letter-spacing:2.5px; color:var(--ink);
+    text-shadow:0 2px 14px rgba(0,0,0,.8); }
   .royal-title em { color:var(--gold-bright); font-style:italic; }
-  .hero-sub { text-align:center; color:var(--ink-dim); font-style:italic; margin-top:10px; font-size:17.5px; }
-  .badge-row { display:flex; justify-content:center; gap:14px; margin-top:22px; flex-wrap:wrap; }
+  .hero-sub { color:#e6dcc8; font-style:italic; margin-top:12px; font-size:17.5px;
+    text-shadow:0 2px 14px rgba(0,0,0,.8); }
+  .badge-row { display:flex; justify-content:center; gap:14px; margin-top:26px; flex-wrap:wrap; }
   .badge {
-    border:1px solid rgba(201,162,39,.55); color:#e9d9a6; padding:8px 20px; border-radius:999px;
-    font-size:13px; letter-spacing:2.4px; text-transform:uppercase;
-    background:rgba(201,162,39,.07);
+    border:1px solid rgba(201,162,39,.6); color:#ecdba6; padding:9px 22px; border-radius:999px;
+    font-size:12.5px; letter-spacing:2.6px; text-transform:uppercase;
+    background:rgba(13,13,31,.55); backdrop-filter:blur(6px);
   }
-  .badge.late { border-color:rgba(217,116,116,.55); color:#f0b9b9; background:rgba(217,116,116,.07); }
+  .badge.late { border-color:rgba(217,116,116,.6); color:#f0b9b9; background:rgba(60,13,20,.55); }
+  .scroll-hint { position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+    color:var(--gold-soft); font-size:12px; letter-spacing:4px; text-transform:uppercase; opacity:.85; }
+  .scroll-hint::after { content:''; display:block; width:1px; height:34px; margin:10px auto 0;
+    background:linear-gradient(var(--gold), transparent); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
 
-  .orn { text-align:center; margin:44px 0 8px; color:var(--gold); font-size:19px; letter-spacing:10px; }
+  .wrap { max-width:860px; margin:0 auto; padding:30px 34px 110px; position:relative; z-index:2; }
+
+  .orn { text-align:center; margin:48px 0 6px; color:var(--gold); font-size:19px; letter-spacing:10px; }
   .orn::after { content:''; display:block; width:180px; height:1px; margin:14px auto 0;
     background:linear-gradient(90deg,transparent,var(--gold),transparent); }
 
-  .chapter { position:relative; margin:64px 0; }
+  .chapter { position:relative; margin:70px 0; }
   .chapter-head { text-align:center; margin-bottom:26px; }
   .chapter-kicker { font-size:12px; letter-spacing:5px; text-transform:uppercase; color:var(--gold-soft); }
   .chapter-title { font-family:'Cormorant Garamond',serif; font-size:clamp(26px,5vw,38px);
@@ -72,30 +87,47 @@
   .chapter-title em { color:var(--gold-bright); }
 
   .prose { max-width:660px; margin:0 auto; text-align:center; color:var(--ink);
-    font-family:'EB Garamond',serif; font-size:19.5px; line-height:2; }
+    font-size:19.5px; line-height:2; }
   .prose .drop { font-family:'Great Vibes',cursive; font-size:30px; color:var(--gold-bright); }
   .prose strong { color:var(--gold-bright); font-weight:600; }
   .prose em { color:#efd9a7; }
 
-  .gallery { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:30px; }
-  .gallery .tall { grid-row:span 2; }
+  /* ============ Single separated portrait (photo3) ============ */
+  .portrait-solo { max-width:440px; margin:34px auto 0; }
   .pframe {
     position:relative; border-radius:6px; overflow:hidden;
-    border:1px solid rgba(201,162,39,.55);
+    border:1px solid rgba(201,162,39,.6);
     box-shadow:0 18px 50px rgba(0,0,0,.55), inset 0 0 0 6px rgba(13,13,31,.9);
     background:#0d0d1f;
   }
   .pframe img { width:100%; display:block; filter:saturate(.92) contrast(1.02); transition:transform .8s ease; }
-  .pframe:hover img { transform:scale(1.045); }
+  .pframe:hover img { transform:scale(1.04); }
   .pframe::after { content:''; position:absolute; inset:8px; border:1px solid rgba(232,199,102,.35); pointer-events:none; }
-  .pcap { position:absolute; left:0; right:0; bottom:0; padding:26px 16px 12px;
-    background:linear-gradient(transparent, rgba(10,8,20,.88));
-    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15.5px; color:#efe4c8;
+  .pcap { position:absolute; left:0; right:0; bottom:0; padding:30px 16px 12px;
+    background:linear-gradient(transparent, rgba(10,8,20,.9));
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:#efe4c8;
     text-align:center; letter-spacing:.4px; }
   .corner { position:absolute; width:16px; height:16px; border-color:var(--gold-bright); border-style:solid; z-index:2; }
   .c1{top:6px;left:6px;border-width:1px 0 0 1px} .c2{top:6px;right:6px;border-width:1px 1px 0 0}
   .c3{bottom:6px;left:6px;border-width:0 0 1px 1px} .c4{bottom:6px;right:6px;border-width:0 1px 1px 0}
 
+  /* ============ KEDARNATH — family.jpg as full-bleed section background ============ */
+  .kedarnath {
+    position:relative; margin:80px -34px;
+    padding:130px 60px;
+    background:
+      linear-gradient(180deg, rgba(13,13,31,.9) 0%, rgba(26,19,48,.76) 50%, rgba(13,13,31,.93) 100%),
+      url('family.jpg') center 30% / cover no-repeat;
+    background-attachment:fixed;
+    border-top:1px solid rgba(201,162,39,.4); border-bottom:1px solid rgba(201,162,39,.4);
+    text-align:center;
+  }
+  .kedarnath .chapter-kicker { color:var(--gold-bright); }
+  .kedarnath .chapter-title { text-shadow:0 3px 20px rgba(0,0,0,.9); }
+  .kedarnath .prose { text-shadow:0 2px 14px rgba(0,0,0,.95); max-width:600px; }
+  .kedarnath .orn { color:var(--gold-bright); }
+
+  /* ============ Letter ============ */
   .letter {
     max-width:680px; margin:0 auto; position:relative;
     background:linear-gradient(160deg, rgba(245,239,226,.05), rgba(245,239,226,.02));
@@ -103,19 +135,22 @@
   }
   .letter::before { content:'❦'; position:absolute; top:-16px; left:50%; transform:translateX(-50%);
     background:var(--royal-2); color:var(--gold-bright); font-size:22px; padding:0 18px; }
-  .letter p { font-family:'EB Garamond',serif; font-size:19px; line-height:2.05; margin-bottom:18px; }
+  .letter p { font-size:19px; line-height:2.05; margin-bottom:18px; }
   .letter .salut { font-family:'Great Vibes',cursive; font-size:30px; color:var(--gold-bright); margin-bottom:6px; }
   .letter .sig { font-family:'Great Vibes',cursive; font-size:40px; text-align:right;
     color:#f3d98b; margin-top:8px; }
   .letter .role { text-align:right; font-size:12px; letter-spacing:3.5px; text-transform:uppercase; color:var(--ink-dim); }
+  .letter strong { color:var(--gold-bright); font-weight:600; }
 
+  /* ============ Vows ============ */
   .vowels { max-width:700px; margin:0 auto; }
   .vow { display:flex; gap:18px; align-items:flex-start; padding:18px 6px; border-bottom:1px solid rgba(201,162,39,.18); }
   .vow:last-child { border-bottom:none; }
   .vow .mark { font-size:26px; color:var(--gold-bright); line-height:1.4; }
   .vow p { font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:var(--ink); }
-  .vow small { display:block; font-size:14px; color:var(--ink-dim); font-family:'EB Garamond',serif; font-style:normal; margin-top:3px; }
+  .vow small { display:block; font-size:14px; color:var(--ink-dim); font-style:normal; margin-top:3px; }
 
+  /* ============ Final ============ */
   .quote-royal { text-align:center; max-width:640px; margin:0 auto; }
   .quote-royal .q { font-family:'Cormorant Garamond',serif; font-size:clamp(24px,4.6vw,34px);
     font-style:italic; line-height:1.7; color:#f7ecd2; }
@@ -139,10 +174,12 @@
   .fin { text-align:center; margin-top:60px; color:var(--ink-dim); font-style:italic; font-size:15.5px; }
   .fin .crown { font-size:22px; margin-bottom:8px; display:block; }
 
+  @media (max-width:900px) {
+    .hero, .kedarnath { background-attachment:scroll; } /* iOS parallax fallback */
+  }
   @media (max-width:640px) {
-    .gallery { grid-template-columns:1fr; }
-    .gallery .tall { grid-row:auto; }
-    .wrap { padding:56px 20px 90px; }
+    .wrap { padding:20px 22px 90px; }
+    .kedarnath { margin:60px -22px; padding:100px 26px; }
     .letter { padding:40px 24px 34px; }
   }
   .reveal { opacity:0; transform:translateY(26px); transition:opacity 1s ease, transform 1s ease; }
@@ -151,9 +188,9 @@
 </head>
 <body>
 <div class="frame"></div>
-<div class="wrap">
 
-  <!-- HERO -->
+<!-- ============ HERO (river.jpg as background) ============ -->
+<header class="hero">
   <div class="crown-line"><span class="crown">👑</span></div>
   <p class="eyebrow">A Royal Tribute From a Father's Heart</p>
   <h1 class="name-script">Harshita</h1>
@@ -164,10 +201,13 @@
     <span class="badge">💖 Papa's Pride</span>
     <span class="badge late">🙏 Forgive Papa — he was building your future</span>
   </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
 
+<div class="wrap">
   <div class="orn">✦ ✦ ✦</div>
 
-  <!-- CHAPTER I -->
+  <!-- Chapter I — pure text -->
   <div class="chapter reveal">
     <div class="chapter-head">
       <p class="chapter-kicker">Chapter I</p>
@@ -181,50 +221,36 @@
     </p>
   </div>
 
-  <!-- CHAPTER II : gallery -->
+  <!-- Chapter II — one separated portrait (photo3) -->
   <div class="chapter reveal">
     <div class="chapter-head">
       <p class="chapter-kicker">Chapter II</p>
-      <h2 class="chapter-title">Portraits of a <em>Young Queen</em></h2>
+      <h2 class="chapter-title">Portrait of a <em>Young Queen</em></h2>
     </div>
-    <div class="gallery">
-      <div class="pframe tall">
-        <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-        <img src="photo3.jpg" alt="Harshita on the mountain trail">
-        <p class="pcap">Where the trail turns wild and the rivers roar — you simply smile, and the mountains soften. 👑</p>
-      </div>
+    <div class="portrait-solo">
       <div class="pframe">
         <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-        <img src="river.jpg" alt="Harshita beside the glacial river">
-        <p class="pcap">Fearless by the glacial stream — courage wrapped in grace.</p>
-      </div>
-      <div class="pframe">
-        <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-        <img src="photo4.jpg" alt="Harshita riding through the hills">
-        <p class="pcap">The journey matters when the heart beside you matters most.</p>
+        <img src="photo3.jpg" alt="Harshita — a quiet royal glance">
+        <p class="pcap">A quiet royal glance — the kind that makes a father's heart bow. 👑</p>
       </div>
     </div>
   </div>
 
-  <!-- CHAPTER III -->
-  <div class="chapter reveal">
-    <div class="chapter-head">
-      <p class="chapter-kicker">Chapter III</p>
-      <h2 class="chapter-title">At the Gates of <em>Kedarnath</em></h2>
-    </div>
-    <div class="pframe" style="max-width:640px;margin:0 auto">
-      <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-      <img src="family.jpg" alt="Family darshan at Kedarnath">
-      <p class="pcap">Our whole world, standing before the eternal — Baba's blessing upon our family 🙏</p>
-    </div>
-    <p class="prose" style="margin-top:26px">
-      We stood together where the air is thin and prayers are close.
+  <!-- Chapter III — family.jpg as full-bleed background -->
+  <section class="kedarnath reveal">
+    <p class="chapter-kicker">Chapter III</p>
+    <h2 class="chapter-title" style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,5vw,38px);margin-top:6px">
+      At the Gates of <em>Kedarnath</em></h2>
+    <div class="orn">✦ ✦ ✦</div>
+    <p class="prose" style="margin-top:16px">
+      We stood together where the air is thin and prayers are close —
+      our whole world wrapped in Baba's blessing. 🙏<br><br>
       And papa's silent prayer was one line long:
       <strong><em>"Keep her happy, keep her strong — and let her always know the way home."</em></strong>
     </p>
-  </div>
+  </section>
 
-  <!-- CHAPTER IV : the letter -->
+  <!-- Chapter IV — the letter -->
   <div class="chapter reveal">
     <div class="chapter-head">
       <p class="chapter-kicker">Chapter IV</p>
@@ -233,7 +259,7 @@
     <div class="letter">
       <p class="salut">My dearest Riddhu,</p>
       <p>I owe you a birthday wish — and more than that, I owe you the truth:
-         <strong style="color:var(--gold-bright)">you were never forgotten for a single hour.</strong>
+         <strong>you were never forgotten for a single hour.</strong>
          Papa was carrying a mountain that day; even mountains are carried for daughters like you.</p>
       <p>You are fourteen now — old enough to read between my lines, young enough to still
          hold my finger while crossing life's busiest roads. Keep holding it a little longer;
@@ -242,7 +268,7 @@
          in your laughter at the dinner table, in your courage on riverbanks and mountain trails,
          in the young woman you are becoming: <em>strong, kind, unshakeable.</em></p>
       <p>So here is your wish, late by a day but true for a lifetime:
-         <strong style="color:var(--gold-bright)">Happy Birthday, my Princess.</strong>
+         <strong>Happy Birthday, my Princess.</strong>
          Whatever you dream, I will cross storms to fetch it. Wherever you go, my blessing walks ahead of you.
          Whenever you fall, my hand reaches before the ground does.</p>
       <p class="sig">Papa</p>
@@ -250,7 +276,7 @@
     </div>
   </div>
 
-  <!-- CHAPTER V : vows -->
+  <!-- Chapter V — vows -->
   <div class="chapter reveal">
     <div class="chapter-head">
       <p class="chapter-kicker">Chapter V</p>
@@ -264,7 +290,7 @@
     </div>
   </div>
 
-  <!-- CHAPTER VI : closing quote -->
+  <!-- Chapter VI — final -->
   <div class="chapter reveal">
     <div class="chapter-head">
       <p class="chapter-kicker">Chapter VI</p>
